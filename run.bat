@@ -5,7 +5,7 @@ echo ==============================================
 echo.
 
 if not exist "venv\Scripts\activate.bat" (
-    echo [ERROR] Virtual environment (venv) not found.
+    echo [ERROR] Virtual environment not found.
     echo Please run 'setup.bat' first to install requirements.
     echo.
     pause

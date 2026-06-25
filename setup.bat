@@ -23,7 +23,7 @@ echo [INFO] Found Python version !pyver!
 
 :: 2. Create Virtual Environment
 if not exist "venv" (
-    echo [INFO] Creating Python virtual environment (venv)...
+    echo [INFO] Creating Python virtual environment...
     python -m venv venv
     if !errorlevel! neq 0 (
         echo [ERROR] Failed to create virtual environment.
@@ -32,7 +32,7 @@ if not exist "venv" (
     )
     echo [INFO] Virtual environment created successfully.
 ) else (
-    echo [INFO] Virtual environment (venv) already exists.
+    echo [INFO] Virtual environment already exists.
 )
 
 :: 3. Activate Virtual Environment and Install Requirements
@@ -47,7 +47,7 @@ if !errorlevel! neq 0 (
 echo [INFO] Upgrading pip...
 python -m pip install --upgrade pip
 
-echo [INFO] Installing required libraries (this may take a minute)...
+echo [INFO] Installing required libraries...
 python -m pip install -r requirements.txt
 if !errorlevel! neq 0 (
     echo [ERROR] Failed to install requirements.
@@ -59,18 +59,16 @@ echo [INFO] Dependencies installed successfully.
 :: 4. Setup .env file
 if not exist ".env" (
     echo [INFO] Creating default .env configuration file...
-    (
-        echo # Discord Bot Token (Get this from https://discord.com/developers/applications)
-        echo DISCORD_TOKEN=""
-        echo.
-        echo # Database Configuration (Defaults to SQLite if fields are empty)
-        echo DB_TYPE="sqlite"
-        echo USERNAME=""
-        echo DATABASE=""
-        echo PASSWORD=""
-        echo HOST=""
-        echo PORT=""
-    ) > .env
+    echo # Discord Bot Token (Get this from https://discord.com/developers/applications) > .env
+    echo DISCORD_TOKEN="" >> .env
+    echo. >> .env
+    echo # Database Configuration >> .env
+    echo DB_TYPE="sqlite" >> .env
+    echo USERNAME="" >> .env
+    echo DATABASE="" >> .env
+    echo PASSWORD="" >> .env
+    echo HOST="" >> .env
+    echo PORT="" >> .env
     echo [INFO] .env file created. Please open it and add your DISCORD_TOKEN.
 ) else (
     echo [INFO] .env file already exists.
