@@ -59,7 +59,15 @@ echo [INFO] Dependencies installed successfully.
 :: 4. Setup .env file
 if not exist ".env" (
     echo [INFO] Creating default .env configuration file...
-    echo # Discord Bot Token (Get this from https://discord.com/developers/applications) > .env
+    
+    :: Save current console code page
+    for /f "tokens=4" %%a in ('chcp') do set oldcp=%%a
+    
+    :: Switch console code page to UTF-8
+    chcp 65001 >nul
+    
+    :: Write .env file
+    echo # Discord Bot Token - Get this from https://discord.com/developers/applications > .env
     echo DISCORD_TOKEN="" >> .env
     echo. >> .env
     echo # Database Configuration >> .env
@@ -69,6 +77,10 @@ if not exist ".env" (
     echo PASSWORD="" >> .env
     echo HOST="" >> .env
     echo PORT="" >> .env
+    
+    :: Restore old console code page
+    chcp !oldcp! >nul
+    
     echo [INFO] .env file created. Please open it and add your DISCORD_TOKEN.
 ) else (
     echo [INFO] .env file already exists.
